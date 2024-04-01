@@ -12,7 +12,11 @@ class IncomeController extends Controller
     public function index()
     {
         $incomes=Income::where('user_id', Auth::id())->get();
-        $categories=Categories::where('type', Categories::TYPE_INCOME)->get();
+
+        $categories=Categories::where('type', Categories::TYPE_INCOME)
+            ->where('user_id', Auth::id())
+            ->get();
+
         return view('income.index', compact('incomes', 'categories'));
     }
 

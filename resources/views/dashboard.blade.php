@@ -122,11 +122,5 @@
                 maintainAspectRatio: false
             }
         });
-
-
-
     </script>
-
-
-
 @endsection

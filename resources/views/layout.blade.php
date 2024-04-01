@@ -32,9 +32,9 @@
             <a class="hover:text-gray-300" href="{{route('categories.index')}}">Categories</a>
             <a class="hover:text-gray-300" href="{{route('income.index')}}">Income</a>
             <a class="hover:text-gray-300" href="{{route('expense.index')}}">Expenses</a>
-            <a class="hover:text-gray-300" href="{{route('login.index')}}">Login</a>
-            <a class="hover:text-gray-300" href="{{route('logout')}}">Logout</a>
-            <p>{{Auth::user()->name ?? ''}}</p>
+            <a class="hover:text-gray-300" href="{{route('account')}}">Profile - {{Auth::user()->name ?? ''}}</a>
+
+
         </nav>
     </div>
 </header>

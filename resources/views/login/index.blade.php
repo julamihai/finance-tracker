@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('welcomelayout')
 @section('title', 'Login')
 
 @section('content')
@@ -26,8 +26,14 @@
 
                 <div class="flex items-center justify-between">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+                    <button type="submit" onclick="goBack()" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Go back</button>
                     <a href="{{ route('register.index') }}" class="text-sm font-bold text-blue-500 hover:text-blue-800">Don't have an account?</a>
                 </div>
+                <script>
+                    function goBack(){
+                        window.history.back();
+                    }
+                </script>
             </form>
         </div>
     </div>

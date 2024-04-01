@@ -12,7 +12,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses=Expense::where('user_id', Auth::id())->get();
-        $categories=Categories::where('type', Categories::TYPE_EXPENSE)->get();
+        $categories=Categories::where('type', Categories::TYPE_EXPENSE)->where('user_id', Auth::id())->get();
         return view('expense.index', compact('expenses', 'categories'));
     }
     public function store(Request $request)

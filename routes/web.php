@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 //dashboard
 Route::middleware('auth')->group(function() {
     Route::get('/',[\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
+    Route::get('/account',[\App\Http\Controllers\AuthController::class,'account'])->name('account');
     //categories-routes
     Route::get('/categories/index',[\App\Http\Controllers\CategoriesController::class,'index'])->name('categories.index');
     Route::get('/categories/create',[\App\Http\Controllers\CategoriesController::class,'create'])->name('categories.create');
@@ -38,8 +39,17 @@ Route::middleware('auth')->group(function() {
     Route::get('/expense/edit/{id}',[\App\Http\Controllers\ExpenseController::class,'edit'])->name('expense.edit');
     Route::put('/expense/update/{id}',[\App\Http\Controllers\ExpenseController::class,'update'])->name('expense.update');
     Route::get('/expense/destroy/{id}',[\App\Http\Controllers\ExpenseController::class,'destroy'])->name('expense.destroy');
+
+    Route::delete('/account/account/delete',[\App\Http\Controllers\AuthController::class,'accountDelete'])->name('account.delete');
+
+    Route::post('/account/change-password', [\App\Http\Controllers\AuthController::class, 'changePassword'])->name('change.password');
+    Route::get('/account/change-username', [\App\Http\Controllers\AuthController::class, 'changeUsername'])->name('change.username');
+    Route::post('/account/new-username', [\App\Http\Controllers\AuthController::class, 'newUsername'])->name('new.username');
+    Route::get('/account/change-email', [\App\Http\Controllers\AuthController::class, 'changeEmail'])->name('change.email');
+    Route::post('/account/new-email', [\App\Http\Controllers\AuthController::class, 'newEmail'])->name('new.email');
 });
 
+Route::get('/welcome',[\App\Http\Controllers\AuthController::class, 'welcome'])->name('welcome');
 //register routes
 Route::get('/login',[\App\Http\Controllers\AuthController::class, 'getlogin'])->name('login.index');
 Route::get('/register',[\App\Http\Controllers\AuthController::class, 'getregister'])->name('register.index');
