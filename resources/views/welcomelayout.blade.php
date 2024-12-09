@@ -11,21 +11,27 @@
 <body class="font-sans bg-gray-100">
 
 <!-- Header -->
-<header class="bg-white shadow-md">
-    <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+<header class="bg-gradient-to-r from-gray-800 via-gray-900 to-black shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Logo -->
-        <h1 class="text-2xl font-bold text-gray-800">Finance-Tracker</h1>
+        <h1 class="text-3xl font-extrabold text-gray-200 tracking-wide border-b-2 border-gray-600 pb-1 hover:text-white transition duration-300">
+            Finance-Tracker
+        </h1>
 
         <!-- Navigation Links -->
-        <nav>
-            <a href="{{ route('welcome') }}" class="text-gray-600 hover:text-gray-800 mx-4 transition-all duration-300">Home</a>
-            <a href="#about" class="text-gray-600 hover:text-gray-800 mx-4 transition-all duration-300">About</a>
-            <a href="#services" class="text-gray-600 hover:text-gray-800 mx-4 transition-all duration-300">Services</a>
-            <a href="#contact" class="text-gray-600 hover:text-gray-800 mx-4 transition-all duration-300">Contact</a>
-            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800 mx-4 transition-all duration-300">Account</a>
+        <nav class="flex space-x-6">
+            <a href="{{ route('welcome') }}" class="text-gray-300 text-lg hover:text-gray-100 hover:underline transition duration-300">Home</a>
+            <a href="#about" class="text-gray-300 text-lg hover:text-gray-100 hover:underline transition duration-300">About</a>
+            <a href="#services" class="text-gray-300 text-lg hover:text-gray-100 hover:underline transition duration-300">Services</a>
+            <a href="#contact" class="text-gray-300 text-lg hover:text-gray-100 hover:underline transition duration-300">Contact</a>
+            <a href="{{ route('login') }}" class="bg-gray-700 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition duration-300">
+                Account
+            </a>
         </nav>
     </div>
 </header>
+
+
 
 <div class="container mx-auto py-8">
     @yield('content')

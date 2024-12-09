@@ -1,84 +1,109 @@
 @extends('layout')
 
-@section('title', 'Create Categories')
+@section('title', 'Category Management')
 
 @section('content')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <div class="max-w-md mx-auto">
-        <form action="{{ route('categories.store') }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+    <!-- Add Category Form -->
+    <div class="max-w-4xl mx-auto p-8 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-xl rounded-xl mt-8">
+        <h1 class="text-3xl font-bold text-white text-center mb-6">Add New Category</h1>
+
+        <form action="{{ route('categories.store') }}" method="POST" class="space-y-8">
             @csrf
-            @method('POST')
 
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Create Category</label>
-                <input type="text" id="title" name="title" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Title" required />
-            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Category Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-300">Category Title</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="block w-full mt-2 border border-gray-500 rounded-lg py-2 px-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-white bg-gray-700"
+                        placeholder="Enter category title"
+                        required />
+                </div>
 
-            <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-            <div class="relative">
-                <select id="type" name="type" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
-                    <option selected disabled>Alege</option>
-                    @foreach($types as $type)
-                        <option value="{{ $type }}">{{ strtoupper($type) }}</option>
-                    @endforeach
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293l-1.414 1.414L10 13.414l6.707-6.707-1.414-1.414L10 10.586z"/></svg>
+                <!-- Category Type -->
+                <div>
+                    <label for="type" class="block text-sm font-medium text-gray-300">Category Type</label>
+                    <select
+                        id="type"
+                        name="type"
+                        class="block w-full mt-2 border border-gray-500 rounded-lg py-2 px-4 bg-gray-700 text-white shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required>
+                        <option selected disabled>Select Type</option>
+                        @foreach($types as $type)
+                            <option value="{{ $type }}">{{ strtoupper($type) }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-            <button type="submit" id="category" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6 focus:outline-none focus:shadow-outline">Submit</button>
-        </form>
 
-        @if(session('success'))
-            <script>
-                Swal.fire({
-                    title: 'Success!',
-                    text: '{{ session('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            </script>
-        @endif
+            <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300">
+                Add Category
+            </button>
+        </form>
+    </div>
+
+    <!-- Categories List -->
+    <div class="max-w-4xl mx-auto p-8 bg-gray-800 shadow-xl rounded-xl mt-12">
+        <h2 class="text-2xl font-semibold text-white mb-4">Your Categories</h2>
+
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="w-full text-sm text-left text-gray-200">
+                <thead class="bg-gray-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+                    <th class="px-6 py-3 text-gray-300 font-medium uppercase">Title</th>
+                    <th class="px-6 py-3 text-gray-300 font-medium uppercase">Type</th>
+                    <th class="px-6 py-3 text-gray-300 font-medium uppercase text-center">Actions</th>
                 </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody>
                 @foreach($categories as $category)
-                    <tr class="{{ $loop->iteration % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $category->title }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ strtoupper($category->type) }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="text-blue-600 hover:underline">
+                    <tr class="border-b hover:bg-gray-700 transition">
+                        <td class="px-6 py-4">{{ $category->title }}</td>
+                        <td class="px-6 py-4">{{ strtoupper($category->type) }}</td>
+                        <td class="px-6 py-4 text-center space-x-4">
+                            <a href="{{ route('categories.edit', ['id' => $category->id]) }}"
+                               class="text-indigo-400 hover:underline font-semibold">
                                 Edit
                             </a>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <a href="{{ route('categories.destroy', ['id' => $category->id]) }}" class="text-red-600 hover:underline delete-category">
+                            <a href="{{ route('categories.destroy', ['id' => $category->id]) }}"
+                               class="text-red-400 hover:underline font-semibold">
                                 Delete
                             </a>
                         </td>
                     </tr>
                 @endforeach
-
-                @if(session('success'))
-                    <script>
-                        Swal.fire({
-                            title: 'Success!',
-                            text: '{{ session('success') }}',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-                    </script>
-                @endif
                 </tbody>
             </table>
         </div>
+    </div>
+
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                title: 'Ooops!',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 @endsection
+
 

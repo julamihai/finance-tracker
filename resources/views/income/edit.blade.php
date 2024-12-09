@@ -1,39 +1,67 @@
 @extends('layout')
+
 @section('title', 'Edit Income')
 
 @section('content')
-    <div class="max-w-md mx-auto mt-8">
-        <form action="{{ route('income.update', ['id' => $income->id]) }}" method="POST" class=" max-w-md bg-white shadow-md rounded mt-6 px-8 pt-6 pb-8 mb-4">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Edit Income Form -->
+    <div class="max-w-4xl mx-auto p-8 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-xl rounded-xl mt-8">
+        <h1 class="text-3xl font-bold text-white text-center mb-6">Edit Income</h1>
+
+        <form action="{{ route('income.update', ['id' => $income->id]) }}" method="POST" class="space-y-8">
             @csrf
             @method('PUT')
 
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Income</label>
-                <input type="text" id="title" name="title" value="{{ $income->title }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Title" required />
-            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Income Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-300">Income Title</label>
+                    <input type="text" id="title" name="title" value="{{ $income->title }}"
+                           class="block w-full mt-2 border border-gray-500 rounded-lg py-2 px-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-white bg-gray-700"
+                           placeholder="E.g., Salary, Bonus" required />
+                </div>
 
-            <div class="mb-4">
-                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount</label>
-                <input type="number" id="amount" name="amount" value="{{ $income->amount }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Amount" required />
-            </div>
-
-            <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-            <div class="relative">
-                <select id="category_id" name="category_id" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" @if($income->category->id == $category->id) selected @endif>{{ $category->title }}</option>
-                    @endforeach
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293l-1.414 1.414L10 13.414l6.707-6.707-1.414-1.414L10 10.586z"/></svg>
+                <!-- Income Amount -->
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-300">Amount</label>
+                    <input type="number" id="amount" name="amount" value="{{ $income->amount }}"
+                           class="block w-full mt-2 border border-gray-500 rounded-lg py-2 px-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-white bg-gray-700"
+                           placeholder="E.g., 1000, 5000" required />
                 </div>
             </div>
-            <div class="flex justify-around">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Submit</button>
-                <button type="button" onclick="window.history.back()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Go Back</button>
+
+            <!-- Category Selection -->
+            <div>
+                <label for="category_id" class="block text-sm font-medium text-gray-300">Category</label>
+                <select id="category_id" name="category_id"
+                        class="block w-full mt-2 border border-gray-500 rounded-lg py-2 px-4 bg-gray-700 text-white shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required>
+                    <option selected disabled>Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" @if($income->category && $income->category->id == $category->id) selected @endif>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-between items-center mt-6 space-x-4">
+                <button type="submit"
+                        class="w-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300">
+                    Submit
+                </button>
+                <button type="button"
+                        onclick="window.history.back()"
+                        class="w-1/2 bg-gradient-to-r from-red-600 to-red-400 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300">
+                    Go Back
+                </button>
             </div>
         </form>
     </div>
+
+    <!-- Success Alert -->
     @if(session('success'))
         <script>
             Swal.fire({
@@ -45,3 +73,4 @@
         </script>
     @endif
 @endsection
+

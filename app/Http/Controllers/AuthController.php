@@ -57,7 +57,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return back()->withErrors(['email' => 'Credențialele de autentificare nu sunt valide.']);
+        return back()->withErrors(['email' => 'Email or password did not work! Try again!']);
     }
 
     public function logout()

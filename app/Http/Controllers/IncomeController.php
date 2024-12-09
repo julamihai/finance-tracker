@@ -31,10 +31,15 @@ class IncomeController extends Controller
         $incomes->user_id=Auth::id();
         $incomes->title=$request->input('title');
         $incomes->amount=$request->input('amount');
-        $incomes->category_id=$request->input('category_id');
-        $incomes->save();
+        if ($incomes->category_id=$request->input('category_id') !== null){
+            $incomes->save();
+            return redirect()->route('income.index')->with('success', 'Income added successfully!');
+        }else{
+            return redirect()->route('income.index')->with('notFound', 'Category not found, Please input a category first!');
+        }
 
-        return redirect()->route('income.index')->with('success', 'Income added successfully!');
+
+
     }
     public function edit($id)
     {

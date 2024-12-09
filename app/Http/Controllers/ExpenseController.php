@@ -26,9 +26,12 @@ class ExpenseController extends Controller
         $expense->user_id=Auth::id();
         $expense->title=$request->input('title');
         $expense->amount=$request->input('amount');
-        $expense->category_id=$request->input('category_id');
-        $expense->save();
-        return redirect()->route('expense.index')->with('success', 'Expense created successfully!');
+        if ($expense->category_id=$request->input('category_id') !== null){
+            $expense->save();
+            return redirect()->route('expense.index')->with('success', 'Expense created successfully!');
+        }else{
+            return redirect()->route('expense.index')->with('notFound', 'Category not found, Please input a category first!');
+        }
     }
     public function edit($id)
     {
