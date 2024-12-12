@@ -60,7 +60,7 @@ Route::get('/logout',[\App\Http\Controllers\AuthController::class, 'logout'])->n
 //reset-password routes
 Route::get('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'forgotPassword'])->name('password.request');
 Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'passwordEmail'])->name('password.email');
-Route::get('/reset-password/{token}', [\App\Http\Controllers\ForgotPassword::class, 'passwordReset'])->name('password.reset');  // Corrected this line
+Route::get('/reset-password/{token}', [\App\Http\Controllers\ForgotPassword::class, 'passwordReset'])->name('password.reset');
 Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'passwordUpdate'])->name('password.update');
 
 

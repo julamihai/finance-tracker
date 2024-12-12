@@ -7,20 +7,14 @@
 
         <!-- Reset Password Form Container -->
         <div class="max-w-md w-full bg-gray-800 shadow-xl rounded-lg px-8 py-6">
-
-            <!-- Title -->
             <h2 class="text-2xl text-center text-white font-bold mb-6">Reset Password</h2>
-
-            <!-- Instruction -->
             <p class="text-gray-400 text-center mb-6">Enter your email, new password, and confirmation below to reset your account password.</p>
-
             <!-- Reset Password Form -->
             <form action="{{route('password.update')}}" method="POST">
                 @csrf
 
                 <!-- Hidden Token Field -->
                 <input type="hidden" name="token" value="{{ $token }}">
-
                 <!-- Email Field -->
                 <div class="mb-4">
                     <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">E-Mail Address</label>
@@ -55,30 +49,13 @@
                     </button>
                 </div>
 
-                <!-- Go Back Button -->
-                <div class="mt-4 text-center">
-                    <button type="button" onclick="goBack()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
-                        Go Back
-                    </button>
-                </div>
-
                 <!-- Link to Login Page -->
                 <div class="mt-4 text-center">
                     <a href="{{ route('login.index') }}" class="text-sm text-blue-400 hover:text-blue-600 font-bold">
                         Remembered your password? Login here!
                     </a>
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-
 @endsection
