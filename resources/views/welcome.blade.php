@@ -67,24 +67,34 @@
         </div>
     </section>
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 rounded-xl shadow-lg">
-        <div class="container mx-auto px-8">
-            <h2 class="text-4xl font-bold mb-6 text-white text-center">Contact Me via Email.</h2>
-            <form action="#" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700 font-semibold mb-2">Your Name</label>
-                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 font-semibold mb-2">Your Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email">
-                </div>
-                <div class="mb-4">
-                    <label for="message" class="block text-gray-700 font-semibold mb-2">Message</label>
-                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your message"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">Send Message</button>
-            </form>
+    <section id="contact" class="py-16 bg-gradient-to-r from-gray-800 via-gray-900 to-black flex justify-center items-center">
+        <div class="container mx-auto px-8 flex justify-center items-center">
+            <div class="max-w-md w-full bg-gray-800 shadow-xl rounded-lg px-8 py-6">
+                <h2 class="text-2xl text-center text-white font-bold mb-6">Contact Me via Email</h2>
+
+                <form action="#" method="POST">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Your Name</label>
+                        <input type="text" id="name" name="name" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-300 bg-gray-700 focus:outline-none focus:shadow-outline" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-300 text-sm font-semibold mb-2">Your Email</label>
+                        <input type="email" id="email" name="email" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-300 bg-gray-700 focus:outline-none focus:shadow-outline" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-300 text-sm font-semibold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="4" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-300 bg-gray-700 focus:outline-none focus:shadow-outline" placeholder="Enter your message" required></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-between space-x-4">
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 @endsection

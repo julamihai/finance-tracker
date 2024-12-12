@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 //dashboard
 Route::middleware('auth')->group(function() {
-    Route::get('/',[\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
+    Route::get('/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
     Route::get('/account',[\App\Http\Controllers\AuthController::class,'account'])->name('account');
     //categories-routes
     Route::get('/categories/index',[\App\Http\Controllers\CategoriesController::class,'index'])->name('categories.index');
@@ -49,12 +49,19 @@ Route::middleware('auth')->group(function() {
     Route::post('/account/new-email', [\App\Http\Controllers\AuthController::class, 'newEmail'])->name('new.email');
 });
 
-Route::get('/welcome',[\App\Http\Controllers\AuthController::class, 'welcome'])->name('welcome');
+Route::get('/',[\App\Http\Controllers\AuthController::class, 'welcome'])->name('welcome');
 //register routes
 Route::get('/login',[\App\Http\Controllers\AuthController::class, 'getlogin'])->name('login.index');
 Route::get('/register',[\App\Http\Controllers\AuthController::class, 'getregister'])->name('register.index');
 Route::post('/register',[\App\Http\Controllers\AuthController::class, 'register'])->name('register');
 Route::post('/login',[\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::get('/logout',[\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+//reset-password routes
+Route::get('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'forgotPassword'])->name('password.request');
+Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'passwordEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [\App\Http\Controllers\ForgotPassword::class, 'passwordReset'])->name('password.reset');  // Corrected this line
+Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'passwordUpdate'])->name('password.update');
+
 
 
