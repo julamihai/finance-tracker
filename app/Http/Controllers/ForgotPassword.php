@@ -39,7 +39,7 @@ class ForgotPassword extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:8|',
+            'password' => 'required|min:8|confirmed',
         ]);
 
         $status = Password::reset(
@@ -47,7 +47,7 @@ class ForgotPassword extends Controller
             function (User $user, string $password) {
                 $user->forceFill([
                     'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+                ])->setRememberToken(Str::random(10));
 
                 $user->save();
 
