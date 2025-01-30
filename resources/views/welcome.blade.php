@@ -72,7 +72,8 @@
             <div class="max-w-md w-full bg-gray-800 shadow-xl rounded-lg px-8 py-6">
                 <h2 class="text-2xl text-center text-white font-bold mb-6">Contact Me via Email</h2>
 
-                <form action="#" method="POST">
+                <form action="{{route('contact.message')}}" method="POST">
+                    @csrf
                     <div class="mb-4">
                         <label for="name" class="block text-gray-300 text-sm font-semibold mb-2">Your Name</label>
                         <input type="text" id="name" name="name" class="appearance-none border rounded-md w-full py-2 px-3 text-gray-300 bg-gray-700 focus:outline-none focus:shadow-outline" placeholder="Enter your name" required>

@@ -70,7 +70,7 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            $user->delete();
+            $user->forceDelete();
             Auth::logout();
             return redirect()->route('login')->with('success', 'Your account has been deleted successfully!');
         } else {

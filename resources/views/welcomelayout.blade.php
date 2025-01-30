@@ -15,7 +15,7 @@
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Logo -->
         <h1 class="text-3xl font-extrabold text-gray-200 tracking-wide border-b-2 border-gray-600 pb-1 hover:text-white transition duration-300">
-            Finance-Tracker
+            <a href="{{route('welcome')}}">Finance-Tracker</a>
         </h1>
 
         <!-- Navigation Links -->
